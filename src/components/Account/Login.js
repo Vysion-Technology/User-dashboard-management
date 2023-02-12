@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import {Link} from '@mui/material';
-import { Button } from '@mui/material';
 import styled from "styled-components";
 import Logo from "../../logo1.jpg";
 
@@ -260,10 +259,6 @@ const Signupdiv = styled.div`
     flex-grow: 0;
 `;
 
-const Makelink = styled(Button)`
-    text-transform: none;
-    
-`;
 const StyledLink = styled(Link)`
   color: Blue;
   text-decoration: none;
@@ -271,12 +266,22 @@ const StyledLink = styled(Link)`
   padding-left: 1px;
   position: relative;
 `;
+
+ const signupInitialValues = {
+     userName: '',
+     email: '',
+     password: ''
+ }
 const LoginPage = ()=> {
 
    const [account, toggleAccount] = useState('login');
+   const [signup, setSignup] = useState(signupInitialValues);
 
    const toggleSignup = () =>{
         account === 'login'? toggleAccount('signup') : toggleAccount('login');
+   }
+   const onInputChange = (e) =>{
+        setSignup({ ...signup,[e.target.name]: e.target.value});
    }
     return(
         <>
@@ -307,10 +312,10 @@ const LoginPage = ()=> {
                       <Message>Welcome to the STP monitoring dashboard
                               designed and developed by vysion technology pvt ltd.</Message>
                       <Box>
-                      <UserName placeholder='Username'></UserName>
-                      <UserName placeholder='Email'></UserName>
-                      <Password placeholder='Password' type='password'></Password>
-                      <Password placeholder='Re-Password' type='password'></Password>
+                      <UserName placeholder='Username' onChange={(e) => onInputChange(e) } name='Username'></UserName>
+                      <UserName placeholder='Email' onChange={(e) => onInputChange(e) } name='Email'></UserName>
+                      <Password placeholder='Password' type='password' onChange={(e) => onInputChange(e) } name='Password'></Password>
+                      <Password placeholder='Re-Password' type='password' onChange={(e) => onInputChange(e) } name='Re-Password'></Password>
                       <LoginButton>Signup</LoginButton>
                       </Box>
                      

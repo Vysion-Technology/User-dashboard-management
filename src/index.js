@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import LoginPage from './Account/Login';
+import LoginPage from './components/Account/Login';
 import Formed from './components/Formed';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    {/* <LoginPage/> */}
-    <Formed/>
+    <LoginPage/>
+    {/* <Formed/> */}
   </React.StrictMode>
 );
 

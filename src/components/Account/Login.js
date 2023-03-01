@@ -4,13 +4,15 @@ import {Link} from '@mui/material';
 import styled from "styled-components";
 import Logo from "../../logo1.jpg";
 
+import { API } from "../../service/api";
+
 
 const Grid1 = styled.div`
-    position: relative;
+    position: absolute;
     display:flex;
     justify-content:center;
     align-items: center;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     left: 0px;
     top: 0px;
@@ -68,7 +70,7 @@ const Logologin = styled.div`
     // margin-top: 60px;
     display: flex;
     margin: auto;
-    transform: translate(10px, 190px);
+    transform: translate(10px, 100px);
     background-image: url(${Logo});
 
     /* Inside auto layout */
@@ -85,7 +87,7 @@ const Logosignup = styled.div`
     // margin-top: 60px;
     display: flex;
     margin: auto;
-    transform: translate(10px, 150px);
+    transform: translate(10px, 70px);
     background-image: url(${Logo});
 
     /* Inside auto layout */
@@ -283,6 +285,9 @@ const LoginPage = ()=> {
    const onInputChange = (e) =>{
         setSignup({ ...signup,[e.target.name]: e.target.value});
    }
+   const signupUser = async () =>{
+         let response = await API.userSignup(signup);
+   }
     return(
         <>
      {
@@ -316,7 +321,7 @@ const LoginPage = ()=> {
                       <UserName placeholder='Email' onChange={(e) => onInputChange(e) } name='Email'></UserName>
                       <Password placeholder='Password' type='password' onChange={(e) => onInputChange(e) } name='Password'></Password>
                       <Password placeholder='Re-Password' type='password' onChange={(e) => onInputChange(e) } name='Re-Password'></Password>
-                      <LoginButton>Signup</LoginButton>
+                      <LoginButton onClick={()=> signupUser()}>Signup</LoginButton>
                       </Box>
                      
                       <Signupdiv>Have an account?<StyledLink onClick={()=> toggleSignup()}>Log in</StyledLink></Signupdiv>

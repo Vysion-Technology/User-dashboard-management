@@ -5,12 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LoginPage from './components/Account/Login';
 import Formed from './components/Formed';
+import Verification from './components/Verification';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <LoginPage/>
+    <Verification/>
     {/* <Formed/> */}
   </React.StrictMode>
 );

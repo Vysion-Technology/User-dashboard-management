@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import LoginPage from './components/Account/Login';
 import Formed from './components/Formed';
 import Verification from './components/Verification';
+import FrontPage from './components/FrontPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

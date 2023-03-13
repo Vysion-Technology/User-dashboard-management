@@ -16,6 +16,7 @@ const Property1Default = styled('div')({
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
+  marginTop: `15px`
 });
 
 const Rectangle1 = styled('img')({

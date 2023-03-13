@@ -4,7 +4,7 @@ import IndustryImg from './../assets/images/metallurgical-industry.png';
 import  styled  from "styled-components";
 
 const Container = styled.div`
-  position: absolute;
+  position: fixed;
     display:flex;
     justify-content:center;
     align-items: center;
@@ -14,9 +14,10 @@ const Container = styled.div`
     top: 0px;
     background: #FFFFFF;
 `
-const BgImg = styled.img`
-  marginLeft :
-  width: 50%;
+const Bgimg = styled.div`
+  // marginLeft :
+  background-image: url(${IndustryImg});
+  width: 77%;
   height: 100%;
   margin-left: auto;
   top: 0px;
@@ -27,7 +28,8 @@ const Frame = styled.div`
     justify-Content: flex-start;
     align-Items: flex-start;
     padding: 0px;
-    margin-top:0%;
+    margin-top: 15%;
+    margin-left: 10%;
     height: 100vh;
     width: 40%;
   `
@@ -38,8 +40,88 @@ const Frame = styled.div`
   font-weight: 700;
   font-size: 24px;
   line-height: 29px;
+  color: #404040;
+`
+ const Msg = styled.div`
+ width: 403.99px;
+ height: 3px;
+ margin-top: 44px;
+ font-family: 'Inter';
+ font-style: normal;
+ font-weight: 500;
+ font-size: 16px;
+ line-height: 19px;
+ display: flex;
+ align-items: center;
+ text-align: center;
+ 
+ /* Grey/Tertiary */
+ 
+ color: #A1A0A3;
+ 
+ 
+ /* Inside auto layout */
+ 
+ flex: none;
+ order: 1;
+ flex-grow: 0;
+ `
+ const Box1 = styled.div`
+//  display: flex;
+ align-items: center;
+ text-align: center;
+ `
+ const Box2 = styled.div`
+  margin-top: 120px;
+ `
+ const Maintxt = styled.div`
+ position: relative;
+    left: 92.99px;
+    top: 48.52px;
+    right: 181px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 56px;
+    line-height: 87px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    text-transform: uppercase;
+    color: #FFFFFF;
+ `
+ const Cont = styled.div`
+ position: absolute;
+width: 403.99px;
+height: 76px;
+left: 719.99px;
+top: 233.82px;
 
-color: #404040;
+font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 19px;
+display: flex;
+align-items: center;
+
+color: #FFFFFF;
+ `
+const Rect1 = styled.div`
+position: absolute;
+width: 1125.01px;
+height: 571.88px;
+left: 719.99px;
+top: 356px;
+
+background: #FFFFFF;
+border: 5px solid rgba(0, 0, 0, 0.29);
+border-radius: 31px 0px 0px 0px;
 `
 const Component6 = styled(Component3)(({ theme }) => ({
     width: `404.92px`,
@@ -68,18 +150,27 @@ const Component6 = styled(Component3)(({ theme }) => ({
 
 
 function FrontPage(props) {
-    return (<Container>
-    <Frame>
+    return (
+    <Container>
+      <Frame>
+            <Box1>
             <Title>
-                STP Monitoring System
+                STP MONITORING SYSTEM
             </Title>
+            <Msg>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, sit.</Msg>
+            </Box1>
+            <Box2>
             <Component6 title="I am Admin"/>
             <Component7 title="I am Engineer"/>
             <Component8 title="I am team member"/>
-    </Frame>
-    <BgImg
-        src={IndustryImg}
-        />
+            </Box2>
+      </Frame>
+      <Bgimg>
+         <Maintxt> Monitor STP plant like never before </Maintxt>
+         <Cont>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti quae consequatur quos praesentium distinctio  </Cont>
+         <Rect1></Rect1>
+      </Bgimg>
+      
     </Container>);
 }
 

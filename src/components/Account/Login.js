@@ -3,6 +3,7 @@ import { useState } from "react";
 import {Link} from '@mui/material';
 import styled from "styled-components";
 import Logo from "../../logo1.jpg";
+import { authenticateSignup } from "../../service/api";
 
 import { API } from "../../service/api";
 
@@ -272,7 +273,9 @@ const StyledLink = styled(Link)`
  const signupInitialValues = {
      userName: '',
      email: '',
-     password: ''
+     password: '',
+     re_password: '',
+     
  }
 const LoginPage = ()=> {
 
@@ -286,7 +289,14 @@ const LoginPage = ()=> {
         setSignup({ ...signup,[e.target.name]: e.target.value});
    }
    const signupUser = async () =>{
-         let response = await API.userSignup(signup);
+         if(signup.password === signup.re_password)
+         {
+         let response = await authenticateSignup(signup);
+         if(!response) return console.log("response not found");
+         }
+         else{
+            console.log("password not match");
+         }
    }
     return(
         <>
@@ -317,10 +327,10 @@ const LoginPage = ()=> {
                       <Message>Welcome to the STP monitoring dashboard
                               designed and developed by vysion technology pvt ltd.</Message>
                       <Box>
-                      <UserName placeholder='Username' onChange={(e) => onInputChange(e) } name='Username'></UserName>
-                      <UserName placeholder='Email' onChange={(e) => onInputChange(e) } name='Email'></UserName>
-                      <Password placeholder='Password' type='password' onChange={(e) => onInputChange(e) } name='Password'></Password>
-                      <Password placeholder='Re-Password' type='password' onChange={(e) => onInputChange(e) } name='Re-Password'></Password>
+                      <UserName placeholder='Username' onChange={(e) => onInputChange(e) } name='userName'></UserName>
+                      <UserName placeholder='Email' onChange={(e) => onInputChange(e) } name='email'></UserName>
+                      <Password placeholder='Password' type='password' onChange={(e) => onInputChange(e) } name='password'></Password>
+                      <Password placeholder='Re-Password' type='password' onChange={(e) => onInputChange(e) } name='re_password'></Password>
                       <LoginButton onClick={()=> signupUser()}>Signup</LoginButton>
                       </Box>
                      

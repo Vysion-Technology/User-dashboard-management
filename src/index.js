@@ -4,6 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import LoginPage from './components/Account/Login';
+import FrontPage from './components/FrontPage';
+// import Home from './components/pages/Home';
 // import Formed from './components/Formed';
 // import Verification from './components/Verification';
 // import FrontPage from './components/FrontPage';
@@ -13,6 +15,8 @@ root.render(
   <React.StrictMode>
     {/* <App /> */}
     <LoginPage/>
+    {/* <FrontPage/> */}
+    {/* <Home/> */}
     {/* <Formed/> */}
   </React.StrictMode>
 );

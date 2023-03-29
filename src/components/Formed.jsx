@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from "styled-components";
 import VysionBlackLogo1Image from './../assets/images/Login_Vysion_black_logo_1.png';
-
+import { useState } from "react";
+import { formApi } from '../service/api';
 const Container = styled.div`
   height : 100%;
   width : 100%;
@@ -192,10 +193,27 @@ order: 1;
 flex-grow: 0;
 border: 1px solid transparent;
 `
-  
+const formedIntialValues = {
+    industryName: '',
+    companyName: '',
+    address: '',
+    city: '',
+    pinCode: '',
+    regional: '',
+    uploaded: ''
+}
 
 
 function Formed(props) {
+  const[formed,setFormed] = useState(formedIntialValues);
+
+  const onFormedChange = (e) => {
+       setFormed({...formed, [e.target.name]: e.target.value});
+  }
+  const formData = async () => {
+        let response = await formApi(formed);
+        if(!response) console.log("Error while form data");
+  }
   return (
     <Container>
     <Header>
@@ -212,34 +230,34 @@ function Formed(props) {
     <Frame>
     <Row>
     <Label>{`Industry Category`}</Label>
-    <Input placeholder='Industry Name'></Input>
+    <Input placeholder='Industry Name' onChange = {(e) => onFormedChange(e)} name='industryName'></Input>
     </Row>
     <Row>
     <Label>{`Company Name`}</Label>
-    <Input placeholder='Company Name'></Input>
+    <Input placeholder='Company Name' onChange = {(e) => onFormedChange(e)} name='companyName'></Input>
     </Row>
     <Row>
     <Label>{`Address`}</Label>
-    <InputLarge placeholder='City Address'></InputLarge>
+    <InputLarge placeholder='City Address' onChange = {(e) => onFormedChange(e)} name='address'></InputLarge>
     </Row>
     <Row>
     <Label>{``}</Label>
   
-    <InputSmallL placeholder='City'></InputSmallL>
-    <InputSmall placeholder='Pin Code'></InputSmall>
+    <InputSmallL placeholder='City' onChange = {(e) => onFormedChange(e)} name='city'></InputSmallL>
+    <InputSmall placeholder='Pin Code'onChange = {(e) => onFormedChange(e)} name='pinCode'></InputSmall>
    
     </Row>
     <Row>
     <Label>{`Name of Regional CTPB`}</Label>
-    <Input placeholder='Name of Regional CTPB'></Input>
+    <Input placeholder='Name of Regional CTPB' onChange = {(e) => onFormedChange(e)} name='regional'></Input>
     </Row>
     <Row>
     <Label>{`Status of Industry`}</Label>
-    <Input placeholder='Upload Documents'></Input>
+    <Input placeholder='Upload Documents' onChange = {(e) => onFormedChange(e)} name='uploaded'></Input>
     </Row>
     <RowB>
         <Button>Save</Button>
-        <Button>Submit</Button>
+        <Button onClick={() => formData()}>Submit</Button>
         <ButtonG>Print</ButtonG>
     </RowB>
     </Frame>

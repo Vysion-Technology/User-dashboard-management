@@ -108,4 +108,19 @@ export const authenticateSignup = async (user) => {
     }
 }
 
+export const authenticateLogin = async (user) =>{
+    try {
+         return await axios.post(`${API_URL}/login`, user);
+    } catch (error){
+        console.log('error while calling Login API: ', error);
+    }
+}
+
+export const formApi = async (user) =>{
+    try{
+        return await axios.post(`${API_URL}/formed`, user);
+    }catch (error){
+        console.log('error while saving form data ', error);
+    }
+}
 // export {API};

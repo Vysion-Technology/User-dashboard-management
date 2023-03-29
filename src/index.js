@@ -6,16 +6,34 @@ import reportWebVitals from './reportWebVitals';
 import LoginPage from './components/Account/Login';
 import FrontPage from './components/FrontPage';
 // import Home from './components/pages/Home';
-// import Formed from './components/Formed';
-// import Verification from './components/Verification';
-import FrontPage from './components/FrontPage';
+import Formed from './components/Formed';
+// import SideBar from './components/Industries/sidebar';
+// import Frame1 from './components/check/Frame1';
+// import Component1 from './components/check/Component1';
+// import Admin from './components/Industries/myteam/admin';
+// import AdminSection from './components/Industries/myteam/admin';
+// import ManagerSection from './components/Industries/myteam/manager';
+
+// import MyTeamPage from './components/Industries/myteam/myteam';
+// import IndustryPage from './components/Industries/industries';
+import Verification from './components/Verification';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <LoginPage/>
+    {/* <Frame1/> */}
+    {/* <SideBar/> */}
+    {/* <ManagerSection/> */}
+    {/* <Frame48/> */}
+    {/* <MyTeamPage/> */}
+    {/* <IndustryPage/> */}
+    {/* <Component1/> */}
+    {/* <LoginPage/> */}
     {/* <Formed/> */}
+    {/* <FrontPage/> */}
+    <Verification/>
   </React.StrictMode>
 );
 

@@ -3,7 +3,9 @@ import { useState } from "react";
 import {Link} from '@mui/material';
 import styled from "styled-components";
 import Logo from "../../logo1.jpg";
-import { authenticateSignup } from "../../service/api";
+import { authenticateLogin, authenticateSignup } from "../../service/api";
+import Formed from "../Formed";
+import { useNavigate } from "react-router-dom";
 
 import { API } from "../../service/api";
 
@@ -249,7 +251,7 @@ const Signupdiv = styled.div`
 
     text-align: center;
     margin-left: 80px;
-    margin-top: 40px;
+    margin-top: 30px;
     /* Grey/Tertiary */
 
     color: #A1A0A3;
@@ -265,10 +267,18 @@ const Signupdiv = styled.div`
 const StyledLink = styled(Link)`
   color: Blue;
   text-decoration: none;
-  margin: 1rem;
+  margin: 0.8rem;
   padding-left: 1px;
   position: relative;
 `;
+const Error = styled.p`
+    font-size: 10px;
+    color: #ff6161;
+    line-height: 0;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-weight: 600;
+;`
 
  const signupInitialValues = {
      userName: '',
@@ -277,10 +287,18 @@ const StyledLink = styled(Link)`
      re_password: '',
      
  }
+
+ const loginIntialValues = {
+    userName: '',
+    password: '',
+ }
 const LoginPage = ()=> {
 
    const [account, toggleAccount] = useState('login');
    const [signup, setSignup] = useState(signupInitialValues);
+   const [login, setLogin] = useState(loginIntialValues);
+   const [error, setError] = useState('');
+   const navigate = useNavigate();
 
    const toggleSignup = () =>{
         account === 'login'? toggleAccount('signup') : toggleAccount('login');
@@ -288,15 +306,29 @@ const LoginPage = ()=> {
    const onInputChange = (e) =>{
         setSignup({ ...signup,[e.target.name]: e.target.value});
    }
+   const onLoginChange = (e) =>{
+        setLogin({...login, [e.target.name]: e.target.value });
+   }
    const signupUser = async () =>{
          if(signup.password === signup.re_password)
          {
          let response = await authenticateSignup(signup);
-         if(!response) return console.log("response not found");
+         if(response){
+           navigate('/verification');
+         }
+         if(!response) return setError('Something went wrong! Please try again');
          }
          else{
-            console.log("password not match");
+            setError('Password not match');
          }
+   }
+   
+   const loginUser = async () =>{
+          let response = await authenticateLogin(login);
+          if(response){
+            navigate('/formed');
+          }
+          if(!response) return setError('Username or Password not correct');
    }
     return(
         <>
@@ -310,9 +342,10 @@ const LoginPage = ()=> {
                     <Message>Welcome to the STP monitoring dashboard
                             designed and developed by vysion technology pvt ltd.</Message>
                     <Box>
-                    <UserName placeholder='Username or Email'></UserName>
-                    <Password placeholder='Password' type='password'></Password>
-                    <LoginButton>Login</LoginButton>
+                    <UserName placeholder='Username or Email' onChange = {(e) => onLoginChange(e)} name='userName'></UserName>
+                    <Password placeholder='Password' type='password' onChange = {(e) => onLoginChange(e)}name='password'></Password>
+                    {error && <Error>{error}</Error>}
+                    <LoginButton onClick={()=> loginUser()}>Login</LoginButton>
                     </Box>
                     <Signupdiv>Don’t have an account?<StyledLink variant="text" onClick={()=> toggleSignup()}>Sign up</StyledLink></Signupdiv>
                   </Login>
@@ -331,6 +364,7 @@ const LoginPage = ()=> {
                       <UserName placeholder='Email' onChange={(e) => onInputChange(e) } name='email'></UserName>
                       <Password placeholder='Password' type='password' onChange={(e) => onInputChange(e) } name='password'></Password>
                       <Password placeholder='Re-Password' type='password' onChange={(e) => onInputChange(e) } name='re_password'></Password>
+                      {error && <Error>{error}</Error>}
                       <LoginButton onClick={()=> signupUser()}>Signup</LoginButton>
                       </Box>
                      

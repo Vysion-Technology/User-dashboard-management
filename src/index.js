@@ -33,7 +33,7 @@ root.render(
     {/* <LoginPage/> */}
     {/* <Formed/> */}
     {/* <FrontPage/> */}
-    <Verification/>
+    <App/>
   </React.StrictMode>
 );
 

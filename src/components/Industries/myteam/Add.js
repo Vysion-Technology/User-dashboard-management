@@ -24,20 +24,6 @@ align-items:center;
 `;
 
 
-// const options = [
-//     {
-//       value: 'Consumable',
-//       label: 'Consumable',
-//     },
-//     {
-//       value: 'Non-Consumable',
-//       label: 'Non-Consumable',
-//     },
-//     {
-//       value: 'Service',
-//       label: 'Service',
-//     }
-//   ];
 
   const itemInitialValue = {
     name:'',

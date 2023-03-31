@@ -123,4 +123,23 @@ export const formApi = async (user) =>{
         console.log('error while saving form data ', error);
     }
 }
+
+export const addMemberValue = async (user) =>{
+    try{
+        return await axios.post(`${API_URL}/addMember`, user);
+    }catch (error){
+        console.log('error while saving form data ', error);
+    }
+}
+
+export const getMember = async () => {
+    try{
+        const response = await axios.get(`${API_URL}/getAddMember`);
+        console.log(response.data);
+        return response.data;
+    }catch(error){
+        console.log("error while calling api",error.message);
+    }
+} 
+
 // export {API};

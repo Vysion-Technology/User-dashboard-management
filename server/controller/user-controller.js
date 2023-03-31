@@ -1,7 +1,7 @@
 
 import User from '../model/user.js';
 import formSchema from '../model/form.js';
-
+import addMemberSchema from '../model/addMember.js';
 
 
 export const signupUser = async (request, response) => {
@@ -46,4 +46,29 @@ export const formData = async (request, response) => {
     }catch (error){
         response.status(500).json({msg:'Error while form data saving'});
     }
+}
+
+export const addMember = async (request, response) => {
+    try{
+        const user = request.body;
+
+        const newUser = new addMemberSchema(user);
+        await newUser.save();
+
+        response.status(200).json({ msg : 'Add Member data save Successfully'});
+    }catch (error){
+        response.status(500).json({msg:'Error while form data saving'});
+    }
+}
+
+export const getMember = async(req,res)=>{
+    try{
+        
+        const data = await addMemberSchema.find();
+        console.log(data);
+        res.status(200).json(data);
+    }catch (error){
+        console.log("error while getting add member",error.message);
+        res.status(200).send("server error");
+    }
 }

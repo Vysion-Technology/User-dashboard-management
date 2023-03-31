@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {Link} from '@mui/material';
 import styled from "styled-components";
 import people from './assets/images/people.png';
@@ -7,7 +7,10 @@ import { Grid } from "@material-ui/core";
 import AdminSection from "./admin";
 import ManagerSection from "./manager";
 import union from './assets/images/Union.png';
-
+import Add from "./Add";
+import { useNavigate } from "react-router-dom";
+import { getMember } from "../../../service/api";
+import axios from 'axios';
 const Box1 = styled.div`
   postition: absolute;
   left: 100px;
@@ -199,10 +202,37 @@ flex-grow: 0;
 const Box3 = styled.div`
   margin-top: 100px;
 `
+const Box4 = styled.p`
+font-weight: 500;
 
+`
+const Box5 = styled.p`
+border: none;
+border-bottom: 1px solid black;
+`
 const MyTeamPage = () =>{
+  const [isAdd,setIsAdd] = useState(false);
+  const [isHome, setIsHome] = useState(true);
+  const navigate = useNavigate();
+  const handleAdd = () =>{
+    navigate('/add');
+  }
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const dataFromMongoDB = await axios.get(`http://localhost:8000/getAddMember`);
+      console.log(dataFromMongoDB);
+      setData(dataFromMongoDB.data);
+    }
+    fetchData();
+  }, []);
+   console.log(data);
    return(
-    <Box1>
+   
+   
+    <>
+   <Box1>
      <Header>
         <HeaderIn1>
            <LogoTeam></LogoTeam>
@@ -213,7 +243,7 @@ const MyTeamPage = () =>{
         <MyTeam>My Team</MyTeam>
         <Text2>View your all team in one place and manage them also</Text2>
       </Box2>
-      <Grid container spacing={{ xs: 2, md: 3 }}>
+      <Grid container spacing={9}>
         <Grid item lg={4} >
           <AdminSection/>
         </Grid>
@@ -222,26 +252,28 @@ const MyTeamPage = () =>{
         </Grid>
       </Grid>
       <TeamMember>Team Member</TeamMember>
-      <Button>
+      <Button onClick = {()=> handleAdd()}>
         <Plus></Plus>
         <ButtonText>Add Member</ButtonText>
       </Button>
       <Box3>
-      <Grid container  >
-         <Grid item lg={2}>
-             Name
+      <Grid container spacing={3} >
+         <Grid item lg={2} >
+             <Box4>Name</Box4>
          </Grid>
          <Grid item lg={2}>
-             Post
+             <Box4>Post</Box4>
          </Grid>
          <Grid item lg={2}>
-             Phone
+             <Box4>Phone</Box4>
          </Grid>
          <Grid item lg={2}>
-             E-Mail
+             <Box4>Email</Box4>
          </Grid>
       </Grid>
-      <Grid container  >
+      <Box5></Box5>
+      {/* <br/> */}
+      {/* <Grid container  >
          <Grid item lg={2}>
              Harshit Sharma
          </Grid>
@@ -254,9 +286,30 @@ const MyTeamPage = () =>{
          <Grid item lg={2}>
              harshitpro010@gmail.com
          </Grid>
-      </Grid>
+      </Grid> */}
+      {
+        data.map((info) =>
+       <Grid container spacing={2} >
+         <Grid item lg={2}>
+             {info.name}
+         </Grid>
+         <Grid item lg={2}>
+             {info.post}
+         </Grid>
+         <Grid item lg={2}>
+             {info.phone}
+         </Grid>
+         <Grid item lg={2}>
+             {info.email}
+         </Grid>
+      </Grid>   
+        
+        ) 
+      }
       </Box3>
      </Box1>
+    
+   </> 
    );
 }
 

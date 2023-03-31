@@ -15,8 +15,9 @@ import Formed from './components/Formed';
 // import ManagerSection from './components/Industries/myteam/manager';
 
 // import MyTeamPage from './components/Industries/myteam/myteam';
-// import IndustryPage from './components/Industries/industries';
+import IndustryPage from './components/Industries/industries';
 import Verification from './components/Verification';
+import Add from './components/Industries/myteam/Add';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,11 +30,13 @@ root.render(
     {/* <Frame48/> */}
     {/* <MyTeamPage/> */}
     {/* <IndustryPage/> */}
+    {/* <Add/> */}
     {/* <Component1/> */}
     {/* <LoginPage/> */}
     {/* <Formed/> */}
     {/* <FrontPage/> */}
     <App/>
+
   </React.StrictMode>
 );
 

@@ -16,7 +16,10 @@ const userSchema = mongoose.Schema({
         required: true,
     },
     level: {
-        level : String,
+        type : String,
+    },
+    myPar :{
+        type: String,
     }
 })
 

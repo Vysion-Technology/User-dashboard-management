@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Component3 from './Component3';
 import IndustryImg from './../assets/images/metallurgical-industry.png';
 import  styled  from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   position: fixed;
@@ -147,9 +148,27 @@ const Component6 = styled(Component3)(({ theme }) => ({
     top: `0px`,
   }));
 
-
+  
 
 function FrontPage(props) {
+
+  const navigate = useNavigate();
+  const [level, setLevel]=useState('');
+
+
+  const navAdmin = (e) =>{
+    console.log("test");
+    console.log(e);
+     setLevel(1);
+    }
+  
+    const navTeam = async () =>{
+      navigate('/formed');
+    }
+    const navEng = async () =>{
+      navigate('/formed');
+    }
+
     return (
     <Container>
       <Frame>
@@ -160,9 +179,9 @@ function FrontPage(props) {
             <Msg>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum, sit.</Msg>
             </Box1>
             <Box2>
-            <Component6 title="I am Admin"/>
-            <Component7 title="I am Engineer"/>
-            <Component8 title="I am team member"/>
+            <Component6  level="1" title="I am Admin"/>
+            <Component7  level="2" title="I am Engineer"/>
+            <Component8  level="3" title="I am team member"/>
             </Box2>
       </Frame>
       <Bgimg>

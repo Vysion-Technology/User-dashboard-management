@@ -221,7 +221,11 @@ const MyTeamPage = () =>{
 
   useEffect(() => {
     async function fetchData() {
-      const dataFromMongoDB = await axios.get(`http://localhost:8000/getAddMember`);
+      const dataFromMongoDB = await axios.get(`http://localhost:8000/getAddMember`, {
+        params: {
+          myPar: '642afad13cb706081699c20d'
+        }
+      });
       console.log(dataFromMongoDB);
       setData(dataFromMongoDB.data);
     }

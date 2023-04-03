@@ -5,7 +5,7 @@ import styled from "styled-components";
 import Logo from "../../logo1.jpg";
 import { authenticateLogin, authenticateSignup } from "../../service/api";
 import Formed from "../Formed";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useLocation } from "react-router-dom";
 
 import { API } from "../../service/api";
 
@@ -291,14 +291,22 @@ const Error = styled.p`
  const loginIntialValues = {
     userName: '',
     password: '',
+    level:'',
  }
-const LoginPage = ()=> {
+const LoginPage = (props)=> {
 
    const [account, toggleAccount] = useState('login');
    const [signup, setSignup] = useState(signupInitialValues);
    const [login, setLogin] = useState(loginIntialValues);
    const [error, setError] = useState('');
    const navigate = useNavigate();
+   const location  = useLocation();
+   //cons
+
+   const level=location.state.level;
+   
+   
+   console.log(level);
 
    const toggleSignup = () =>{
         account === 'login'? toggleAccount('signup') : toggleAccount('login');
@@ -324,7 +332,10 @@ const LoginPage = ()=> {
    }
    
    const loginUser = async () =>{
+         login.level=level;
+         console.log(login);
           let response = await authenticateLogin(login);
+          console.log(response);
           if(response){
             navigate('/formed');
           }

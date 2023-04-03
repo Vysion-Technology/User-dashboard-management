@@ -47,6 +47,7 @@ function Add() {
 
   const addMember = async ()=>{
     
+    addItem.myPar = '642afad13cb706081699c20d'
     let response = await addMemberValue(addItem);
    
     navigate('/industry');

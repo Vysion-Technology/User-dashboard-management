@@ -4,6 +4,7 @@ import Ellipse964Image from './../assets/images/Component3_Ellipse_964.png';
 import Ellipse965Image from './../assets/images/Component3_Ellipse_965.png';
 import Ellipse963Image from './../assets/images/Component3_Ellipse_963.png';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
 const Property1Default = styled('div')({
   display: `flex`,
@@ -150,6 +151,10 @@ const RadioButton = styled('input')({
 
 
 function Component3(props) {
+  const navigate = useNavigate();
+  const nav = async () =>{
+    navigate('/login',{state : {  level: props.level, color: 'green'  },});
+  }
   return (
     <Property1Default className={props.className}>
       <Rectangle1 src={Rectangle1Image} loading="lazy" alt={'Rectangle 1'} />
@@ -178,6 +183,7 @@ function Component3(props) {
           </Frame427319037>
         </Frame427319036>
         <RadioButton
+        onChange={() => nav()}
          type="radio"
          name="radio"
          value="admin"

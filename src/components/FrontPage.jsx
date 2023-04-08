@@ -29,11 +29,10 @@ const RightSubContainer = styled.div`
 const LeftSubContainer = styled.div`
     display: flex;
     flex-Direction: column;
-    justify-Content: flex-start;
-    align-Items: flex-start;
-    padding: 0px;
-    margin-top: 15%;
-    margin-left: 10%;
+    justify-Content: center;
+    align-Items: center;
+    padding: 5.5%;
+    
     height: 100vh;
     width: 35%;
   `
@@ -64,18 +63,20 @@ const LeftSubContainer = styled.div`
  flex-grow: 0;
  `
  const DivTop = styled.div`
-//  display: flex;
+ display: flex;
  align-items: center;
  text-align: center;
+ flex-direction: column;
+ flex-wrap: nowrap;
  `
  const DivBottom = styled.div`
   margin-top: 120px;
  `
  const Heading = styled.div`
  position: relative;
-    left: 92.99px;
-    top: 48.52px;
-    right: 181px;
+    left: 10%;
+    top: 7%;
+    right: auto;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 800;
@@ -95,16 +96,16 @@ const LeftSubContainer = styled.div`
  `
  const Content = styled.div`
  position: relative;
-width: 403.99px;
-height: 76px;
-left: 12%;
-top: 7%;
+width: 43%;
+height: 12%;
+left: 10%;
+top: 8%;
 
 font-family: 'Inter';
 font-style: normal;
 font-weight: 500;
-font-size: 16px;
-line-height: 19px;
+font-size: 1.1vw;
+line-height: 1.3;
 display: flex;
 align-items: center;
 
@@ -113,9 +114,8 @@ color: #FFFFFF; `
 const MainButton = styled.div`
   white-space: pre-wrap;
   word-wrap: break-word;
-  width : 404.92px;
-  height: 73px;
-
+  width : 24vw;
+  height: 10vh;
 `
 
 const WhiteRectangle = styled.div`

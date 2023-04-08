@@ -12,7 +12,7 @@ const Property1Default = styled('div')({
   isolation: `isolate`,
   flexDirection: `row`,
   width: '100%',
-  height: `73px`,
+  height: `100%`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding: `0px`,
@@ -21,8 +21,8 @@ const Property1Default = styled('div')({
 });
 
 const Rectangle1 = styled('img')({
-  height: `73px`,
-  width: `404.92px`,
+  height: `100%`,
+  width: `100%`,
   position: `absolute`,
   left: `0px`,
   top: `0px`,
@@ -37,7 +37,7 @@ const Frame427319035 = styled('div')({
   alignItems: `center`,
   padding: `0px`,
   boxSizing: `border-box`,
-  width: `364px`,
+  width: `90%`,
   left: `20px`,
   top: `18px`,
 });
@@ -62,7 +62,7 @@ const Group698 = styled('div')({
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  width: `62px`,
+  width: `64px`,
   height: `38px`,
   margin: `0px`,
 });
@@ -114,7 +114,7 @@ const IAmAdmin = styled('div')(({ theme }) => ({
   fontStyle: `normal`,
   fontFamily: `Inter`,
   fontWeight: `700`,
-  fontSize: `16px`,
+  fontSize: `.9vw`,
   letterSpacing: `0px`,
   textDecoration: `none`,
   textTransform: `none`,
@@ -129,7 +129,7 @@ const MyTaskAndAllStuff = styled('div')(({ theme }) => ({
   fontStyle: `normal`,
   fontFamily: `Inter`,
   fontWeight: `400`,
-  fontSize: `12px`,
+  fontSize: `.7vw`,
   letterSpacing: `0px`,
   textDecoration: `none`,
   textTransform: `none`,

@@ -183,7 +183,6 @@ function Component3(props) {
           </Frame427319037>
         </Frame427319036>
         <RadioButton
-        onChange={() => nav()}
          type="radio"
          name="radio"
          value="admin"

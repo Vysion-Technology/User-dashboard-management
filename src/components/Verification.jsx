@@ -119,6 +119,7 @@ function Verification(props) {
   //     });
   // };
    const otpVerify = async ()=>{
+    
      let response = await verifyOtp(otp);
      if(response){
        navigate('/login');

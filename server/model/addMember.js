@@ -18,8 +18,14 @@ const add = mongoose.Schema({
     email: {
         type: String,
         required: true,
+    },
+    level: {
+        type: String,
+    },
+    myPar: {
+        type: String,
+        required: true,
     }
-    
 })
 
 

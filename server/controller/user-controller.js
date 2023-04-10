@@ -67,11 +67,21 @@ export const signupUser = async (request, response) => {
 
 export const loginUser = async (request, response) => {
     let user = await User.findOne({ userName : request.body.userName });
+    console.log(request.body);
+    console.log(user.level+" "+user.email);
     if(!user){
         response.status(400).json({ msg : 'Username doest not match'});
     }
+
+   
     try{
         if(request.body.password === user.password){
+            console.log(request.body.level+" "+user.level);
+            if(!(request.body.level == user.level)){
+                console.log("Bad Status")
+                response.status(400).json({ msg : 'Level not matched'});
+            }
+            else        
             response.status(200).json({ msg : 'Login Successfully'});
         }
         else{
@@ -111,8 +121,8 @@ export const addMember = async (request, response) => {
 
 export const getMember = async(req,res)=>{
     try{
-        
-        const data = await addMemberSchema.find();
+        console.log(req.query.myPar);
+        const data = await addMemberSchema.find({ myPar : req.query.myPar });
         console.log(data);
         res.status(200).json(data);
     }catch (error){

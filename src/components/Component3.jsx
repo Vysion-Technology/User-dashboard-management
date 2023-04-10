@@ -4,6 +4,7 @@ import Ellipse964Image from './../assets/images/Component3_Ellipse_964.png';
 import Ellipse965Image from './../assets/images/Component3_Ellipse_965.png';
 import Ellipse963Image from './../assets/images/Component3_Ellipse_963.png';
 import { styled } from '@mui/material/styles';
+import { useNavigate } from "react-router-dom";
 
 const Property1Default = styled('div')({
   display: `flex`,
@@ -11,7 +12,7 @@ const Property1Default = styled('div')({
   isolation: `isolate`,
   flexDirection: `row`,
   width: '100%',
-  height: `73px`,
+  height: `100%`,
   justifyContent: `flex-start`,
   alignItems: `flex-start`,
   padding: `0px`,
@@ -20,8 +21,8 @@ const Property1Default = styled('div')({
 });
 
 const Rectangle1 = styled('img')({
-  height: `73px`,
-  width: `404.92px`,
+  height: `100%`,
+  width: `100%`,
   position: `absolute`,
   left: `0px`,
   top: `0px`,
@@ -36,7 +37,7 @@ const Frame427319035 = styled('div')({
   alignItems: `center`,
   padding: `0px`,
   boxSizing: `border-box`,
-  width: `364px`,
+  width: `90%`,
   left: `20px`,
   top: `18px`,
 });
@@ -61,7 +62,7 @@ const Group698 = styled('div')({
   alignItems: `flex-start`,
   padding: `0px`,
   boxSizing: `border-box`,
-  width: `62px`,
+  width: `64px`,
   height: `38px`,
   margin: `0px`,
 });
@@ -113,7 +114,7 @@ const IAmAdmin = styled('div')(({ theme }) => ({
   fontStyle: `normal`,
   fontFamily: `Inter`,
   fontWeight: `700`,
-  fontSize: `16px`,
+  fontSize: `.9vw`,
   letterSpacing: `0px`,
   textDecoration: `none`,
   textTransform: `none`,
@@ -128,7 +129,7 @@ const MyTaskAndAllStuff = styled('div')(({ theme }) => ({
   fontStyle: `normal`,
   fontFamily: `Inter`,
   fontWeight: `400`,
-  fontSize: `12px`,
+  fontSize: `.7vw`,
   letterSpacing: `0px`,
   textDecoration: `none`,
   textTransform: `none`,
@@ -150,6 +151,10 @@ const RadioButton = styled('input')({
 
 
 function Component3(props) {
+  const navigate = useNavigate();
+  const nav = async () =>{
+    navigate('/login',{state : {  level: props.level, color: 'green'  },});
+  }
   return (
     <Property1Default className={props.className}>
       <Rectangle1 src={Rectangle1Image} loading="lazy" alt={'Rectangle 1'} />

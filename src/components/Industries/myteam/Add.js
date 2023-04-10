@@ -29,7 +29,9 @@ align-items:center;
     name:'',
     post:'',
     phone:'',
-    email:''
+    email:'',
+    myPar:'',
+    level:'0',
   }
 
 function Add() {
@@ -47,7 +49,8 @@ function Add() {
 
   const addMember = async ()=>{
     
-    addItem.myPar = '642afad13cb706081699c20d'
+    addItem.myPar = '642afad13cb706081699c20d';
+    addItem.level='2';
     let response = await addMemberValue(addItem);
    
     navigate('/industry');

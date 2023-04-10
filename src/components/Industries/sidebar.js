@@ -11,11 +11,12 @@ import myteam from './img/myteam.png';
 import notification from './img/notification.png';
 import process from './img/process.png';
 import reports from './img/reports.png';
+import circle from './img/circle.png';
 const Container = styled.div`
       
 position: relative;
-width: 303px;
-height: 1080px;
+width: 262px;
+height: 100vh;
 left: 0px;
 top: 0px;
 
@@ -90,6 +91,22 @@ width: 106.78px;
 height: 20px;
 
 
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+`
+const LogoCompany = styled.div`
+position: absolute;
+width: 40%;
+height: 110%;
+margin-left: 3%;
+top: 2%;
+// background: #F7F9FB;
+background-image: url(${circle});
+background-repeat: no-repeat;
+// z-index: -1;
 /* Inside auto layout */
 
 flex: none;
@@ -276,6 +293,15 @@ color: #FFFFFF;
 const SideBar = () =>{
     return(
         <Container>
+          {/* <Menu>
+                 <InnerMenu>
+                   <MostInnerMenu>
+                   <LogoCompany></LogoCompany>
+                   <CompanyName>Company Name</CompanyName>
+                   </MostInnerMenu>
+                 </InnerMenu>
+               </Menu> */}
+          <LogoCompany></LogoCompany>
           <CompanyName>Company Name</CompanyName>
            <Box1>
                <Menu>

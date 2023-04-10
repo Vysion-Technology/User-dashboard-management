@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from "styled-components";
 import MailVer from './../assets/images/mailver.png';
+import { useState } from "react";
+import { verifyOtp } from '../service/api';
+import { useNavigate,useLocation } from "react-router-dom";
+// import LoginPage from './Account/Login';
+// import {Email} from LoginPage
+// import LoginPage from './Account/Login';
 
 
 const Container = styled.div`
@@ -11,7 +17,6 @@ const Container = styled.div`
 
 const Input = styled.input`
 box-sizing: border-box;
-
 
 align-items: center;
 padding: 8px 16px;
@@ -73,17 +78,62 @@ order: 1;
 flex-grow: 0;
 border: 1px solid transparent;
 `
-
+const otpIntialValue = {
+  userEmail: '',
+  otp: ''
+}
 
 function Verification(props) {
-    return (<Container>
+  const [otp, setOTP] = useState(otpIntialValue);
+  // const [userEmail, setUserEmail]= useState('');
+  const location  = useLocation();
+  const navigate = useNavigate();
+  // setUserEmail(location.state.email);
+  const userEmail = location.state.email;
+  console.log(userEmail);
+  const onInputChange = (e) =>{
+    setOTP({...otp, [e.target.name] : [e.target.value]});
+  }
+  // const handleSubmit = ()=>{
+  //   console.log(otp);
+  //    setOTP(otp);
+  // }
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   fetch("/verify-otp", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ otp }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.verified) {
+  //         console.log("OTP verified successfully");
+  //       } else {
+  //         console.log("Invalid OTP");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log("Error verifying OTP:", error);
+  //     });
+  // };
+   const otpVerify = async ()=>{
+     let response = await verifyOtp(otp);
+     if(response){
+       navigate('/login');
+     }
+     if(!response) return console.log("Error while calling api");
+   }
+    return (
+    <Container>
         <Frame>
         <Logo
         src={MailVer}
         />
-        <StyledText>An email with verification code has been sent to yourEmail</StyledText>
-        <Input placeholder='Enter Verification'></Input>
-        <Button>Confirm</Button>
+        <StyledText>{`An email with verification code has been sent to ${userEmail}`}</StyledText>
+        <Input placeholder='Enter Verification' type='text' name='otp'  onChange={(e) => onInputChange(e)} ></Input>
+        <Button type='Submit' onClick={()=> otpVerify()}>Confirm</Button>
         </Frame>
     </Container>);
 }

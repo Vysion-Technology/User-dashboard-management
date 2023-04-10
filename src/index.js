@@ -18,6 +18,7 @@ import Formed from './components/Formed';
 import IndustryPage from './components/Industries/industries';
 import Verification from './components/Verification';
 import Add from './components/Industries/myteam/Add';
+import AddMember from './components/Industries/myteam/from';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -36,6 +37,7 @@ root.render(
     {/* <Formed/> */}
     {/* <FrontPage/> */}
     <App/>
+    {/* <AddMember/> */}
 
   </React.StrictMode>
 );

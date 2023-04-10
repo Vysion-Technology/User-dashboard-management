@@ -6,6 +6,7 @@ import Formed from './components/Formed';
 import Verification from './components/Verification';
 import Add from './components/Industries/myteam/Add';
 import IndustryPage from './components/Industries/industries';
+import AddMember from './components/Industries/myteam/from';
 function App() {
   return (
     <BrowserRouter>
@@ -14,7 +15,7 @@ function App() {
       <Route path="/formed" element={<Formed/>} />
       <Route path="/verification" element={<Verification/>} />
       <Route path="/industry" element={<IndustryPage/>} />
-      <Route path="/add" element={<Add/>} />
+      <Route path="/addMember" element={<AddMember/>} />
       </Routes>
     </BrowserRouter>
   );

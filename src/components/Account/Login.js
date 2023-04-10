@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import {Link} from '@mui/material';
+import { Link } from '@mui/material';
 import styled from "styled-components";
 import Logo from "../../logo1.jpg";
 import { authenticateLogin, authenticateSignup } from "../../service/api";
 import Formed from "../Formed";
 import { useNavigate } from "react-router-dom";
-
+import OTP from "../Verification";
 import { API } from "../../service/api";
-
+// import nodemailer from "nodemailer";
 
 const Grid1 = styled.div`
     position: absolute;
@@ -280,101 +280,109 @@ const Error = styled.p`
     font-weight: 600;
 ;`
 
- const signupInitialValues = {
-     userName: '',
-     email: '',
-     password: '',
-     re_password: '',
-     
- }
-
- const loginIntialValues = {
-    userName: '',
-    password: '',
- }
-const LoginPage = ()=> {
-
-   const [account, toggleAccount] = useState('login');
-   const [signup, setSignup] = useState(signupInitialValues);
-   const [login, setLogin] = useState(loginIntialValues);
-   const [error, setError] = useState('');
-   const navigate = useNavigate();
-
-   const toggleSignup = () =>{
-        account === 'login'? toggleAccount('signup') : toggleAccount('login');
-   }
-   const onInputChange = (e) =>{
-        setSignup({ ...signup,[e.target.name]: e.target.value});
-   }
-   const onLoginChange = (e) =>{
-        setLogin({...login, [e.target.name]: e.target.value });
-   }
-   const signupUser = async () =>{
-         if(signup.password === signup.re_password)
-         {
-         let response = await authenticateSignup(signup);
-         if(response){
-           navigate('/verification');
-         }
-         if(!response) return setError('Something went wrong! Please try again');
-         }
-         else{
-            setError('Password not match');
-         }
-   }
-   
-   const loginUser = async () =>{
-          let response = await authenticateLogin(login);
-          if(response){
-            navigate('/formed');
-          }
-          if(!response) return setError('Username or Password not correct');
-   }
-    return(
-        <>
-     {
-         account === 'login'?
-                <>
-                <Logologin></Logologin>
-                <Grid1>
-
-                  <Login>
-                    <Message>Welcome to the STP monitoring dashboard
-                            designed and developed by vysion technology pvt ltd.</Message>
-                    <Box>
-                    <UserName placeholder='Username or Email' onChange = {(e) => onLoginChange(e)} name='userName'></UserName>
-                    <Password placeholder='Password' type='password' onChange = {(e) => onLoginChange(e)}name='password'></Password>
-                    {error && <Error>{error}</Error>}
-                    <LoginButton onClick={()=> loginUser()}>Login</LoginButton>
-                    </Box>
-                    <Signupdiv>Don’t have an account?<StyledLink variant="text" onClick={()=> toggleSignup()}>Sign up</StyledLink></Signupdiv>
-                  </Login>
-                </Grid1> 
-                </>
-            :
-                   <>
-                   <Logosignup></Logosignup>
-                    <Grid1>
-
-                      <Signup>
-                      <Message>Welcome to the STP monitoring dashboard
-                              designed and developed by vysion technology pvt ltd.</Message>
-                      <Box>
-                      <UserName placeholder='Username' onChange={(e) => onInputChange(e) } name='userName'></UserName>
-                      <UserName placeholder='Email' onChange={(e) => onInputChange(e) } name='email'></UserName>
-                      <Password placeholder='Password' type='password' onChange={(e) => onInputChange(e) } name='password'></Password>
-                      <Password placeholder='Re-Password' type='password' onChange={(e) => onInputChange(e) } name='re_password'></Password>
-                      {error && <Error>{error}</Error>}
-                      <LoginButton onClick={()=> signupUser()}>Signup</LoginButton>
-                      </Box>
-                     
-                      <Signupdiv>Have an account?<StyledLink onClick={()=> toggleSignup()}>Log in</StyledLink></Signupdiv>
-                    </Signup>
-                  </Grid1>
-                  </>
-         }
-    </>
-    );
+const signupInitialValues = {
+  userName: '',
+  email: '',
+  password: '',
+  re_password: '',
+  isVerified: 'false'
 }
 
+const loginIntialValues = {
+  userName: '',
+  password: '',
+}
+
+
+
+const LoginPage = () => {
+
+  const [account, toggleAccount] = useState('login');
+  const [signup, setSignup] = useState(signupInitialValues);
+  const [login, setLogin] = useState(loginIntialValues);
+  const [error, setError] = useState('');
+ 
+  const navigate = useNavigate();
+
+  const toggleSignup = () => {
+    account === 'login' ? toggleAccount('signup') : toggleAccount('login');
+  }
+  const onInputChange = (e) => {
+    setSignup({ ...signup, [e.target.name]: e.target.value });
+  }
+  const onLoginChange = (e) => {
+    setLogin({ ...login, [e.target.name]: e.target.value });
+  }
+
+
+  
+  const signupUser = async () => {
+    
+    if (signup.password === signup.re_password) {
+      
+      let response = await authenticateSignup(signup);
+      if (response){
+        navigate('/verification', {state : {  email: signup.email },});
+        console.log('Signup succefully');
+      }
+      if (!response) return setError('Something went wrong! Please try again');
+    }
+    else {
+      setError('Password not match');
+    }
+  }
+
+  const loginUser = async () => {
+    let response = await authenticateLogin(login);
+    if (response) {
+      navigate('/formed');
+    }
+    if (!response) return setError('Username or Password not correct');
+  }
+  return (
+    <>
+      {
+        account === 'login' ?
+          <>
+            <Logologin></Logologin>
+            <Grid1>
+
+              <Login>
+                <Message>Welcome to the STP monitoring dashboard
+                  designed and developed by vysion technology pvt ltd.</Message>
+                <Box>
+                  <UserName placeholder='Username or Email' onChange={(e) => onLoginChange(e)} name='userName'></UserName>
+                  <Password placeholder='Password' type='password' onChange={(e) => onLoginChange(e)} name='password'></Password>
+                  {error && <Error>{error}</Error>}
+                  <LoginButton onClick={() => loginUser()}>Login</LoginButton>
+                </Box>
+                <Signupdiv>Don’t have an account?<StyledLink variant="text" onClick={() => toggleSignup()}>Sign up</StyledLink></Signupdiv>
+              </Login>
+            </Grid1>
+          </>
+          :
+          <>
+            <Logosignup></Logosignup>
+            <Grid1>
+
+              <Signup>
+                <Message>Welcome to the STP monitoring dashboard
+                  designed and developed by vysion technology pvt ltd.</Message>
+                <Box>
+                  <UserName placeholder='Username' onChange={(e) => onInputChange(e)} name='userName'></UserName>
+                  <UserName placeholder='Email' onChange={(e) => onInputChange(e)} name='email'></UserName>
+                  <Password placeholder='Password' type='password' onChange={(e) => onInputChange(e)} name='password'></Password>
+                  <Password placeholder='Re-Password' type='password' onChange={(e) => onInputChange(e)} name='re_password'></Password>
+                  {error && <Error>{error}</Error>}
+                  <LoginButton onClick={() => signupUser()}>Signup</LoginButton>
+                </Box>
+
+                <Signupdiv>Have an account?<StyledLink onClick={() => toggleSignup()}>Log in</StyledLink></Signupdiv>
+              </Signup>
+            </Grid1>
+          </>
+      }
+    </>
+  );
+}
 export default LoginPage;

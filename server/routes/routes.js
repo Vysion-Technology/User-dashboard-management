@@ -1,6 +1,7 @@
 import express from 'express';
 
-import { signupUser, loginUser, formData, addMember,getMember } from '../controller/user-controller.js';
+import { signupUser, loginUser, formData, addMember,getMember, verifyOtp } from '../controller/user-controller.js';
+
 
 
 
@@ -16,4 +17,7 @@ router.post('/formed', formData);
 router.post('/addMember', addMember);
 
 router.get('/getAddMember',getMember);
+
+router.post('/verification', verifyOtp);
+
 export default router;

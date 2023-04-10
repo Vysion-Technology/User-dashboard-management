@@ -11,6 +11,7 @@ import Add from "./Add";
 import { useNavigate } from "react-router-dom";
 import { getMember } from "../../../service/api";
 import axios from 'axios';
+import AddMember from "./from";
 const Box1 = styled.div`
   postition: absolute;
   left: 100px;
@@ -128,7 +129,7 @@ position: absolute;
 width: 133px;
 height: 28px;
 // left: 323.82px;
-top: 384px;
+top: 43%;
 
 font-family: 'Inter';
 font-style: normal;
@@ -148,18 +149,17 @@ display: flex;
 flex-direction: row;
 justify-content: center;
 align-items: center;
-padding: 8px 16px;
-gap: 8px;
-margin-right: 10px;
-
-position: absolute;
-width: 159px;
-height: 44px;
-left: 85%;
-top: 330px;
-
-background: #338FEB;
-border-radius: 8px;
+    padding: 10px 19px;
+    gap: 6px;
+    margin-right: 42px;
+    position: absolute;
+    width: 11vw;
+    height: 6vh;
+    left: 87%;
+    top: 45%;
+    background: #338FEB;
+    border-radius: 8px;
+    border: none;
 `
 const Plus = styled.div`
 position: absolute;
@@ -200,22 +200,55 @@ order: 1;
 flex-grow: 0;
 `
 const Box3 = styled.div`
-  margin-top: 100px;
+  margin-top: 1%;
 `
 const Box4 = styled.p`
-font-weight: 500;
+width: 4%;
+height: 16px;
 
+font-family: 'SF Pro Text';
+font-style: normal;
+font-weight: 600;
+font-size: 14px;
+line-height: 16px;
+/* identical to box height, or 114% */
+
+
+color: #404040;
+transform: rotate(0deg);
+flex-grow: 2;
+max-width: 21%;
+flex-basis: 46%;
 `
 const Box5 = styled.p`
+margin: 0px;
+padding: 0px;
 border: none;
-border-bottom: 1px solid black;
+border-bottom: 1px solid #888888;
+// box-shadow: 5px 10px #888888;
 `
+const Box6 = styled.p`
+
+width: 30%;
+height: 1px;
+font-family: 'SF Pro Text';
+font-style: normal;
+font-weight: 550;
+font-size: 16px;
+line-height: 8px;
+color: #404040;
+
+flex-grow: 0;
+max-width: 22%;
+flex-basis: 24%;
+`
+
 const MyTeamPage = () =>{
   const [isAdd,setIsAdd] = useState(false);
   const [isHome, setIsHome] = useState(true);
   const navigate = useNavigate();
   const handleAdd = () =>{
-    navigate('/add');
+    navigate('/addMember');
   }
   const [data, setData] = useState([]);
 
@@ -243,7 +276,7 @@ const MyTeamPage = () =>{
         <MyTeam>My Team</MyTeam>
         <Text2>View your all team in one place and manage them also</Text2>
       </Box2>
-      <Grid container spacing={9}>
+      <Grid container spacing={6}>
         <Grid item lg={4} >
           <AdminSection/>
         </Grid>
@@ -257,7 +290,7 @@ const MyTeamPage = () =>{
         <ButtonText>Add Member</ButtonText>
       </Button>
       <Box3>
-      <Grid container spacing={3} >
+      <Grid container  >
          <Grid item lg={2} >
              <Box4>Name</Box4>
          </Grid>
@@ -289,18 +322,18 @@ const MyTeamPage = () =>{
       </Grid> */}
       {
         data.map((info) =>
-       <Grid container spacing={2} >
+       <Grid container spacing={0} >
          <Grid item lg={2}>
-             {info.name}
+             <Box6>{info.name}</Box6>
          </Grid>
          <Grid item lg={2}>
-             {info.post}
+             <Box6>{info.post}</Box6>
          </Grid>
          <Grid item lg={2}>
-             {info.phone}
+             <Box6>{info.phone}</Box6>
          </Grid>
          <Grid item lg={2}>
-             {info.email}
+             <Box6>{info.email}</Box6>
          </Grid>
       </Grid>   
         

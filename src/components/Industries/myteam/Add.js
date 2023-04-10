@@ -144,6 +144,7 @@ function Add() {
             <Button onClick={()=> toIndustry()} >Cancel</Button>
             <Button primary type="submit">Add</Button>
         </Box>
+    
     </Box>
   )
 }

@@ -7,7 +7,7 @@ import SideBar from "./sidebar";
 import MyTeamPage from "./myteam/myteam";
 
 const Box = styled.div`
-  position: absolute;
+  position: fixed;
   width: 100vw;
   height: 100vh;
 `
@@ -16,7 +16,7 @@ const Box = styled.div`
 const IndustryPage = () => {
   return(
     <Box>
-    <Grid container spacing={1}>
+    <Grid container lg={12} spacing={1}>
         <Grid item lg={2.5}>
             <SideBar/>
         </Grid>

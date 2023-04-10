@@ -142,4 +142,11 @@ export const getMember = async () => {
     }
 } 
 
+export const verifyOtp = async (user) =>{
+    try{
+        return await axios.post(`${API_URL}/verification`, user);
+    }catch (error){
+        console.log('error while saving otp ', error);
+    }
+}
 // export {API};

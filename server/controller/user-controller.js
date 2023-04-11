@@ -4,6 +4,7 @@ import formSchema from '../model/form.js';
 import addMemberSchema from '../model/addMember.js';
 import nodemailer from "nodemailer";
 // const nodemailer = require("nodemailer");
+import Mailgen from "mailgen";
 
 
 const transporter = nodemailer.createTransport({
@@ -97,8 +98,12 @@ export const formData = async (request, response) => {
     try{
         const user = request.body;
 
+        
+
         const newUser = new formSchema(user);
         await newUser.save();
+        
+
 
         response.status(200).json({ msg : 'Formed data save Successfully'});
     }catch (error){
@@ -107,12 +112,45 @@ export const formData = async (request, response) => {
 }
 
 export const addMember = async (request, response) => {
-    try{
-        const user = request.body;
+    let MailGenerator = new Mailgen({
+        theme: "default",
+        product: {
+            name: "Vysion Technology",
+            link: 'www.google.com'
+        }
+    });
 
+    let Email = {
+        body: {
+            name: request.body.name,
+            intro: "Welcome to Vysion Technology! We\' are excited to have you on board.",
+            action: {
+                instructions: 'To get started, please click below',
+                button: {
+                    color: '#22BC66',
+                    text: 'Confirm your account',
+                    link: 'http://localhost:3000/'
+                }
+            },
+            outro: "Need help, or have questions? just reply to this email, we\'d love to help."
+        }
+    }
+
+    const emailBody = MailGenerator.generate(Email);
+
+    let message = {
+        from: "krishnapro010@gmail.com",
+        to: request.body.email,
+        subject: "Welcome to Vysion Technology",
+        html: emailBody
+    }
+
+    try{
+        await transporter.sendMail(message);
+        const user = request.body;
+        console.log(user);
         const newUser = new addMemberSchema(user);
         await newUser.save();
-
         response.status(200).json({ msg : 'Add Member data save Successfully'});
     }catch (error){
         response.status(500).json({msg:'Error while form data saving'});
@@ -132,6 +170,8 @@ export const getMember = async(req,res)=>{
 }
 
 export const verifyOtp = async(request,response)=>{
+    console.log("Test tetetst");
+    console.log(request);
     try{
         console.log(request.body);
         const userOtp = request.body.otp;

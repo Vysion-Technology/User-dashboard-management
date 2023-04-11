@@ -320,7 +320,7 @@ const LoginPage = () => {
     if (signup.userName === '' || signup.email === '' || signup.password === '' || signup.re_password === '') {
         return setError('Please fill in all mandatory fields.');
     }
-    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!regex.test(signup.email)) {
       setError('Please enter a valid email address.');
       return;

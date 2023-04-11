@@ -16,12 +16,12 @@ const transporter = nodemailer.createTransport({
   });
 
 const otp = Math.floor(100000 + Math.random() * 900000);
-let signupData;
+
 export const signupUser = async (request, response) => {
-    try{
-        signupData = request.body;
-        // signupData = new User(user);
-        // await newUser.save();
+    try{ 
+            const user = request.body;
+            const newUser = new User(user);
+            await newUser.save();
         response.status(200).json({ msg : 'Signup Successfully'});
         const mailOptions = {
             from: "krishnapro010@gmail.com",
@@ -36,30 +36,6 @@ export const signupUser = async (request, response) => {
               console.log("Email sent: " + info.response);
             }
           });          
-        //    const verifyOtp = async(request,response)=>{
-        //     try{
-        //         const userOtp = request.body.otp;
-        //         if(userOtp === otp){
-        //             const newUser = new User(user);
-        //             await newUser.save();
-        //             response.status(200).json({ msg : 'Signup Successfully'});
-        //             // response.status(200).json({ msg : 'Otp Verify Successfully'});
-        //         }
-        //         else{
-        //             response.status(400).json({ msg : 'Invalid Otp'});
-                // }
-                // const newUser = new addMemberSchema(user);
-                // await newUser.save();
-        
-                
-        //     }catch (error){
-        //         response.status(500).json({msg:'Error while otp backend'});
-        //     }
-        // }
-       
-            
-        
-    
         
     }catch (error){
         response.status(500).json({msg:'Error while Signup'});
@@ -174,16 +150,13 @@ export const verifyOtp = async(request,response)=>{
     console.log(request);
     try{
         console.log(request.body);
-        const userOtp = request.body.otp;
+        const userOtp = request.body.otp[0];
         const userEmail = request.body.userEmail;
         console.log(userOtp);
         console.log(otp);
         console.log(userEmail);
-        if(userOtp === otp){
-            // const verifiedUser = await User.findOneAndUpdate({email:userEmail}, {$set: { isVerified:true }});
-            const newUser = new User(signupData);
-            await newUser.save();
-            await signupData.save();
+        if(userOtp == otp){
+            const verifiedUser = await User.findOneAndUpdate({email:userEmail}, {$set: { isVerified:true }});
             response.status(200).json({ msg : "User registered successfully"});
         }
         else{

@@ -19,13 +19,13 @@ const add = mongoose.Schema({
         type: String,
         required: true,
     },
-    level: {
-        type: String,
-    },
-    myPar: {
-        type: String,
-        required: true,
-    }
+    // level: {
+    //     type: String
+    // },
+    // myPar: {
+    //     type: String
+    //     // required: true,
+    // }
 })
 
 

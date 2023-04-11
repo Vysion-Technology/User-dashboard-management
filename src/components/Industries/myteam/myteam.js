@@ -41,7 +41,7 @@ padding: 0px;
 gap: 16px;
 
 position: absolute;
-width: 104px;
+width: 100px;
 height: 24px;
 // left: 323px;
 top: 26px;
@@ -200,6 +200,7 @@ order: 1;
 flex-grow: 0;
 `
 const Box3 = styled.div`
+  postiton : relative;
   margin-top: 1%;
 `
 const Box4 = styled.p`
@@ -221,6 +222,7 @@ max-width: 21%;
 flex-basis: 46%;
 `
 const Box5 = styled.p`
+width: 100vw;
 margin: 0px;
 padding: 0px;
 border: none;
@@ -229,7 +231,7 @@ border-bottom: 1px solid #888888;
 `
 const Box6 = styled.p`
 
-width: 30%;
+width: 550px;
 height: 1px;
 font-family: 'SF Pro Text';
 font-style: normal;
@@ -239,10 +241,14 @@ line-height: 8px;
 color: #404040;
 
 flex-grow: 0;
-max-width: 22%;
+max-width: 70%;
 flex-basis: 24%;
 `
 
+const Box7 = styled.div`
+  // position: relative;
+  // margin: auto;
+`
 const MyTeamPage = () =>{
   const [isAdd,setIsAdd] = useState(false);
   const [isHome, setIsHome] = useState(true);
@@ -254,11 +260,7 @@ const MyTeamPage = () =>{
 
   useEffect(() => {
     async function fetchData() {
-      const dataFromMongoDB = await axios.get(`http://localhost:8000/getAddMember`, {
-        params: {
-          myPar: '642afad13cb706081699c20d'
-        }
-      });
+      const dataFromMongoDB = await axios.get(`http://localhost:8000/getAddMember`);
       console.log(dataFromMongoDB);
       setData(dataFromMongoDB.data);
     }
@@ -288,12 +290,15 @@ const MyTeamPage = () =>{
           <ManagerSection/>
         </Grid>
       </Grid>
+      <Box7>
       <TeamMember>Team Member</TeamMember>
       <Button onClick = {()=> handleAdd()}>
         <Plus></Plus>
         <ButtonText>Add Member</ButtonText>
       </Button>
+      </Box7>
       <Box3>
+      <Grid container>
       <Grid container  >
          <Grid item lg={2} >
              <Box4>Name</Box4>
@@ -343,6 +348,7 @@ const MyTeamPage = () =>{
         
         ) 
       }
+      </Grid>
       </Box3>
      </Box1>
     

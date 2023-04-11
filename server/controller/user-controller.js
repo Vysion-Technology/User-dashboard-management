@@ -15,12 +15,12 @@ const transporter = nodemailer.createTransport({
   });
 
 const otp = Math.floor(100000 + Math.random() * 900000);
-
+let signupData;
 export const signupUser = async (request, response) => {
     try{
-        const user = request.body;
-        const newUser = new User(user);
-        await newUser.save();
+        signupData = request.body;
+        // signupData = new User(user);
+        // await newUser.save();
         response.status(200).json({ msg : 'Signup Successfully'});
         const mailOptions = {
             from: "krishnapro010@gmail.com",
@@ -121,8 +121,8 @@ export const addMember = async (request, response) => {
 
 export const getMember = async(req,res)=>{
     try{
-        console.log(req.query.myPar);
-        const data = await addMemberSchema.find({ myPar : req.query.myPar });
+        console.log(req.body.email);
+        const data = await addMemberSchema.find();
         console.log(data);
         res.status(200).json(data);
     }catch (error){
@@ -133,19 +133,22 @@ export const getMember = async(req,res)=>{
 
 export const verifyOtp = async(request,response)=>{
     try{
+        console.log(request.body);
         const userOtp = request.body.otp;
         const userEmail = request.body.userEmail;
+        console.log(userOtp);
+        console.log(otp);
+        console.log(userEmail);
         if(userOtp === otp){
-            const verifiedUser = await User.findOneAndUpdate({email:userEmail}, {$set: { isVerified:true }});
+            // const verifiedUser = await User.findOneAndUpdate({email:userEmail}, {$set: { isVerified:true }});
+            const newUser = new User(signupData);
+            await newUser.save();
+            await signupData.save();
             response.status(200).json({ msg : "User registered successfully"});
         }
         else{
             response.status(400).json({ msg : 'Invalid Otp'});
-        }
-        // const newUser = new addMemberSchema(user);
-        // await newUser.save();
-
-        
+        }   
     }catch (error){
         response.status(500).json({msg:'Error while otp backend'});
     }

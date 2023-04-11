@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import MailVer from './../assets/images/mailver.png';
 import { useState } from "react";
-import { verifyOtp } from '../service/api';
+import { otpVerify } from '../service/api';
 import { useNavigate,useLocation } from "react-router-dom";
 // import LoginPage from './Account/Login';
 // import {Email} from LoginPage
@@ -83,17 +83,18 @@ const otpIntialValue = {
   otp: ''
 }
 
-function Verification(props) {
-  const [otp, setOTP] = useState(otpIntialValue);
-  // const [userEmail, setUserEmail]= useState('');
+const Verification = ()=> {
+  const [isOtp, setIsOtp] = useState(otpIntialValue);
   const location  = useLocation();
   const navigate = useNavigate();
   // setUserEmail(location.state.email);
-  const userEmail = location.state.email;
-  console.log(userEmail);
+  
+  // console.log(userEmail);
   const onInputChange = (e) =>{
-    setOTP({...otp, [e.target.name] : [e.target.value]});
+    setIsOtp({...isOtp, [e.target.name] : [e.target.value]});
   }
+  isOtp.userEmail = location.state.email;
+  console.log(isOtp);
   // const handleSubmit = ()=>{
   //   console.log(otp);
   //    setOTP(otp);
@@ -118,8 +119,8 @@ function Verification(props) {
   //       console.log("Error verifying OTP:", error);
   //     });
   // };
-   const otpVerify = async ()=>{
-     let response = await verifyOtp(otp);
+   const verifyOtp = async()=>{
+     let response = await otpVerify(isOtp);
      if(response){
        navigate('/login');
      }
@@ -131,9 +132,9 @@ function Verification(props) {
         <Logo
         src={MailVer}
         />
-        <StyledText>{`An email with verification code has been sent to ${userEmail}`}</StyledText>
+        <StyledText>{`An email with verification code has been sent to ${isOtp.userEmail}`}</StyledText>
         <Input placeholder='Enter Verification' type='text' name='otp'  onChange={(e) => onInputChange(e)} ></Input>
-        <Button type='Submit' onClick={()=> otpVerify()}>Confirm</Button>
+        <Button onClick={()=> verifyOtp()}>Confirm</Button>
         </Frame>
     </Container>);
 }

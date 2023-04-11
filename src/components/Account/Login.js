@@ -317,6 +317,14 @@ const LoginPage = () => {
 
   
   const signupUser = async () => {
+    if (signup.userName === '' || signup.email === '' || signup.password === '' || signup.re_password === '') {
+        return setError('Please fill in all mandatory fields.');
+    }
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{3,}$/;
+    if (!regex.test(signup.email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
     
     if (signup.password === signup.re_password) {
       
@@ -325,7 +333,7 @@ const LoginPage = () => {
         navigate('/verification', {state : {  email: signup.email },});
         console.log('Signup succefully');
       }
-      if (!response) return setError('Something went wrong! Please try again');
+      if (!response) return setError('E-Mail is already exist');
     }
     else {
       setError('Password not match');
@@ -333,6 +341,9 @@ const LoginPage = () => {
   }
 
   const loginUser = async () => {
+    if (login.userName === '' ||  login.password === '') {
+      return setError('Please fill in all mandatory fields.');
+  }
     let response = await authenticateLogin(login);
     if (response) {
       navigate('/formed');
